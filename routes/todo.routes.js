@@ -3,10 +3,12 @@ const db = require('../db');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-
+    try{
     const todo = await db.query('SELECT * FROM todo;');
     res.json(todo.rows);
-
+    } catch (error) {
+        console.log(error);
+        }
     // try {
     //     const data = await db.query('SELECT * FROM todo;');
     //     res.status(200).json({todo: data.rows});
@@ -17,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const {task} = req.body;
+    const { task } = req.body;
 
     const data = await db.query("SELECT * FROM todo WHERE task = $1;", [task]);
     console.log(data.rows);
