@@ -3,7 +3,7 @@ const db = require('../db');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const todo = await db.query('SELECT * FROM todo;');
+    const data = await db.query('SELECT * FROM todo;');
     res.status(200).json({todo: data.rows});
 });
 
